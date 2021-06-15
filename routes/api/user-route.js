@@ -39,4 +39,4 @@ router.get('/api/users', (req, res) => {
 
 // delete to remove a friend from user's friend list
 
-// module.exports = router;
+module.exports = router;
