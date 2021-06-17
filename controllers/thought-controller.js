@@ -14,10 +14,10 @@ const thoughtController = {
  },
 // get a single thought by its _id
  getThoughtById({ params}, res) {
-     Thought.findOne({_id: params.id})
+     Thought.findOne({_id: params.thoughtId})
      .then(dbThoughtData => {
         // if no user is found send 404
-        if(!dbUserData){
+        if(!dbThoughtData){
             res.status(404).json({ message: 'No thought found with this id!' });
         return;
         }
@@ -28,6 +28,7 @@ const thoughtController = {
         res.status(400).json(err);
     });
  },
+
 // post to create a new thought(push created thought's _id to the associated user's thoughts)
  addThought({ params, body }, res) {
     console.log(body)
@@ -42,7 +43,7 @@ const thoughtController = {
     .then(dbUserData => {
         // if no user is found send 404
         if(!dbUserData){
-            res.status(404).json({ message: 'No thought found with this id!' });
+            res.status(404).json({ message: 'No user found with this id!' });
         return;
         }
         res.json(dbUserData)
@@ -62,8 +63,9 @@ const thoughtController = {
 
 // put to update thought by its _id
  updateThought({ params, body }, res) {
-     Thought.findOneAndUpdate({ _id: params.id }, body, { new: true })
+     Thought.findOneAndUpdate({ _id: params.thoughtId  }, body, { new: true })
      .then(dbThoughtData => {
+         console.log(params)
         if(!dbThoughtData){
           res.status(404).json({ message: 'No thought found with this id!' });
         }
@@ -74,12 +76,12 @@ const thoughtController = {
 
 // delete to remove a thought by its id
  deleteThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id})
-    .then(dbNoteData => {
-        if(!dbNoteData){
-          res.status(404).json({ message: 'No Note found with this id!' });
+    Thought.findOneAndDelete({ _id: params.thoughtId })
+    .then(dbThoughtData => {
+        if(!dbThoughtData){
+          res.status(404).json({ message: 'No thought found with this id!' });
       }
-        res.json(dbNoteData)})
+        res.json(dbThoughtData)})
     .catch(err => res.status(400).json(err))
  },
 
