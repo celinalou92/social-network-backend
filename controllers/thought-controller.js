@@ -1,8 +1,9 @@
+const { Types } = require('mongoose');
 const { User, Thought } = require('../models');
 
 const thoughtController = {
 
-// /api/thoughts
+// /api/thought
 // get all thoughts 
  getAllThoughts(req, res) {
      Thought.find({})
@@ -87,12 +88,21 @@ const thoughtController = {
 
 
 // ------ reaction routes ------ //
-// /api/thoughts/:thoughtId/reactions
-
-
-
 // post to create a reaction stored ina single thought's array 
-
+ addReaction({ params, body }, res) {
+     console.log(body)
+     Thought.findOneAndUpdate(
+        { _id: params.thoughtId },
+        { $addToSet: { reactions: body } },
+        { new: true, runValidators: true } 
+     )
+     .then(dbThoughtData => {
+        if(!dbThoughtData){
+          res.status(404).json({ message: 'No thought found with this id!' });
+      }
+        res.json(dbThoughtData)})
+    .catch(err => res.status(400).json(err))
+ },
 
 
 // delete to pull and remove a reaction by the reaction's reactionId

@@ -78,7 +78,7 @@ const userController = {
             res.json(dbUserData);
         })
         .catch(err => res.status(400).json(err));
-  }
+  },
 
 
 // bonus remove a user's associated thoughts when deleted
@@ -89,7 +89,21 @@ const userController = {
 // /api/users/:userId/friends/:friendId
 
 // post to add a new friend to user's friend list
-
+  addFriend({ params, body }, res) {
+      User.findOneAndUpdate(
+        { _id: params.userId },
+        { $push: { friends: params.friendId} },
+        { new: true, runValidators: true }
+      )
+      .then(dbUserData => {
+        if(!dbUserData) {
+          res.status(404).json({ message: 'No user found with this id!' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => res.status(400).json(err));
+  }
 
 // delete to remove a friend from user's friend list
 };
