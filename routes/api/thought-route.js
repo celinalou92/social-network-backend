@@ -7,30 +7,28 @@ const {
     updateThought, 
     deleteThought,
     addReaction
-  } = require('../../controllers/thought-controller');
+} = require('../../controllers/thought-controller');
 
+
+router
+.route('/')
+.get(getAllThoughts);
 
 // Set up GET all and POST at /api/thought/:userId
 router
-  .route('/:userId')
-  .get(getAllThoughts)
-  .post(addThought);
+.route('/:userId')
+.get(getAllThoughts)
+.post(addThought);
 
 
-router
-  .route('/')
-  .get(getAllThoughts);
-  
-  router
-  .route('/thought/:thoughtId')
-  .put(updateThought)
 
 // Set up GET one, PUT, and DELETE at /api/:userId/:thoughtId
 router
-  .route('/:userId/:thoughtId')
-  .get(getThoughtById)
-  .delete(deleteThought)
-  .post(addReaction);
+.route('/:userId/:thoughtId')
+.get(getThoughtById)
+.put(updateThought)
+.delete(deleteThought)
+.post(addReaction);
 
 
 
