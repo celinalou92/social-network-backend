@@ -39,7 +39,9 @@ const userSchema = new Schema(
 );
 
 // add virtual here that retrienves the length of user's array field on query 
-// UserSchema.virtual('friendCount').get(functoin(){>insert code<});
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length;
+});
 
 
 // create the User model using UserSchema

@@ -8,6 +8,7 @@ const {
     deleteThought,
     addReaction
 } = require('../../controllers/thought-controller');
+const { route } = require('./user-route');
 
 
 router
@@ -28,8 +29,11 @@ router
 .get(getThoughtById)
 .put(updateThought)
 .delete(deleteThought)
-.post(addReaction);
 
+
+router
+.route('/:userId/:thoughtId/reactions')
+.post(addReaction);
 
 
 // remove reaction route you'll need to create a new route for this one, because you'll need the id of the individual reply, not just its parent.
