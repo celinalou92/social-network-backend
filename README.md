@@ -8,7 +8,7 @@
 
   ## Tables of Contents
   * [Installation](#installation)
-  * [Link to Deployed Site](#link-to-deployed-site)
+  * [Link to Demo](#link-to-demo)
   * [Usage](#usage)
   * [License](#license)
   * [Questions](#questions)
@@ -16,7 +16,8 @@
   ## Installation 
   npm install
   
-
+  ## Link to Demo
+    https://vimeo.com/565284427
 
   ## Usage
   This project can be used as a backend database to manage users, posts and replies.  
@@ -32,6 +33,4 @@
 
   ## License 
   ### No License
-  
-
   
